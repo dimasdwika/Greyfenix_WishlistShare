@@ -1,0 +1,15 @@
+{
+    "name": "greyfenix/wishlistshare",
+    "license": "MIT",
+    "type": "magento-module",
+    "description": "Fix Magento bug for adding all cart in from Shared Wishlist email",
+    "homepage": "https://github.com/dimasdwika/GreyFenix_WishlistShare",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "authors":[
+        {
+            "name":"Dimas Putra"
+        }
+    ]
+}
