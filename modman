@@ -1,0 +1,5 @@
+# Code file
+app/code/community/Greyfenix/WishlistShare  app/code/community/Greyfenix/WishlistShare
+
+# Etc file
+app/etc/modules/Greyfenix_WishlistShare.xml app/etc/modules/Greyfenix_WishlistShare.xml
