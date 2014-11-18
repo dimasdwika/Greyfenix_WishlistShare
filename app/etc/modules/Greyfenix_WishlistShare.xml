@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Greyfenix_WishlistShare>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Wishlist />
+            </depends>
+        </Greyfenix_WishlistShare>
+    </modules>
+</config>
