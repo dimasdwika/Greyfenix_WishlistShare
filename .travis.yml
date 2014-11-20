@@ -1,42 +1,21 @@
 language: php
-
 env:
   - MAGENTO_VERSION="1.9.0.1"
 
 php:
-  - 5.3
   - 5.4
-  - 5.5
 
 before_install:
+  - mkdir magento/
+  - cp -f .travis/composer.json composer.json
+  - composer install --dev
 
 before_script:
   - CURR_DIR=$(pwd)
-
-  #move extension files to new folder
-  #- mkdir $CURR_DIR/wishlistshare
-  - rsync -a $CURR_DIR/ $CURR_DIR/wishlistshare --exclude $CURR_DIR/wishlistshare --exclude $CURR_DIR/mageci --exclude $CURR_DIR/phpunit --exclude $CURR_DIR/magento
-
-  #install mage ci
-  - git clone git://github.com/EcomDev/MageCI.git $CURR_DIR/mageci/
-
-  #install modman
-  - wget https://raw.githubusercontent.com/colinmollenhour/modman/master/modman -O $CURR_DIR/mageci/bin/modman
-  - chmod +x $CURR_DIR/mageci/bin/modman
-
-  #install magento
-  - $CURR_DIR/mageci/bin/mage-ci install magento $MAGENTO_VERSION magento_test -c -t -r http://mage-ci.ecomdev.org
-
-  #install php unit
-  - git clone git://github.com/EcomDev/EcomDev_PHPUnit.git -b dev $CURR_DIR/phpunit/
-  - $CURR_DIR/mageci/bin/mage-ci install-module magento $CURR_DIR/phpunit
-
-  #install wishlistshare to magento directory
-  - $CURR_DIR/mageci/bin/mage-ci install-module magento $CURR_DIR/wishlistshare
-
-  - cp ./.travis/composer.json magento
-  - cd magento
-  - composer install --prefer-dist
+  - bin/mage-ci install magento $MAGENTO_VERSION magento_test -c -t -r http://mage-ci.ecomdev.org
+  - bin/mage-ci install-module magento $CURR_DIR
+  - git clone git://github.com/IvanChepurnyi/EcomDev_PHPUnit.git -b dev ./phpunit/
+  - bin/mage-ci install-module $CURR_DIR/magento $CURR_DIR/phpunit/
 
 script:
-  - phpunit test
+  - bin/mage-ci phpunit magento
